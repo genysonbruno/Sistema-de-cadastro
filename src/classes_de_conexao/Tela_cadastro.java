@@ -7,11 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -94,8 +97,26 @@ public class Tela_cadastro extends JFrame {
 				
 				try {
 					
-				}catch(SQLException e2){
+					Connection conectar = Conexao.fazConexao();
 					
+					String sql = "insert into dados_senhas(usuario, senha) value (?,?)";
+					
+					PreparedStatement stmt = conectar.prepareStatement(sql);
+					
+					stmt.setString(1, tfUsuario.getText());
+					stmt.setString(2, tfSenha.getText());
+					
+					stmt.execute();
+					
+					stmt.close();
+					conectar.close();
+					JOptionPane.showMessageDialog(null, " Usuario cadastrado com sucesso!!");
+					
+					tfUsuario.setText("");
+					tfSenha.setText("");
+					
+				}catch(SQLException e1){
+					e1.printStackTrace();
 				}
 				
 				

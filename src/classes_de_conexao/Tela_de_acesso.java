@@ -112,6 +112,7 @@ public class Tela_de_acesso extends JFrame {
 					stmt.close();
 					conectar.close();
 					
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
